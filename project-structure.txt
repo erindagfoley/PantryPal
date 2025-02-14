@@ -1,0 +1,80 @@
+.
+├── LICENSE
+├── README.md
+├── api
+│   ├── config
+│   ├── controllers
+│   ├── middleware
+│   ├── models
+│   ├── routes
+│   └── server.js
+├── client
+│   ├── index.html
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── public
+│   │   ├── _redirects
+│   │   └── vite.svg
+│   ├── src
+│   │   ├── App.tsx
+│   │   ├── api
+│   │   │   ├── authAPI.tsx
+│   │   │   └── userAPI.tsx
+│   │   ├── assets
+│   │   │   └── react.svg
+│   │   ├── components
+│   │   │   ├── Navbar.tsx
+│   │   │   └── Users.tsx
+│   │   ├── index.css
+│   │   ├── interfaces
+│   │   │   ├── ApiMessage.tsx
+│   │   │   ├── UserData.tsx
+│   │   │   └── UserLogin.tsx
+│   │   ├── main.tsx
+│   │   ├── pages
+│   │   │   ├── ErrorPage.tsx
+│   │   │   ├── Home.tsx
+│   │   │   ├── Login.tsx
+│   │   │   └── SignUp.tsx
+│   │   ├── utils
+│   │   │   └── auth.ts
+│   │   └── vite-env.d.ts
+│   ├── tsconfig.json
+│   ├── tsconfig.node.json
+│   └── vite.config.ts
+├── package-lock.json
+├── package.json
+├── project-structure.txt
+├── server
+│   ├── db
+│   │   └── schema.sql
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── src
+│   │   ├── config
+│   │   │   └── connection.ts
+│   │   ├── middleware
+│   │   │   └── auth.ts
+│   │   ├── models
+│   │   │   ├── User.ts
+│   │   │   └── index.ts
+│   │   ├── routes
+│   │   │   ├── api
+│   │   │   │   ├── index.ts
+│   │   │   │   └── user-routes.ts
+│   │   │   ├── auth-routes.ts
+│   │   │   └── index.ts
+│   │   ├── seeds
+│   │   │   ├── index.ts
+│   │   │   └── user-seeds.ts
+│   │   └── server.ts
+│   └── tsconfig.json
+├── src
+│   ├── App.js
+│   ├── api
+│   ├── components
+│   ├── index.js
+│   └── pages
+└── tsconfig.json
+
+29 directories, 49 files
