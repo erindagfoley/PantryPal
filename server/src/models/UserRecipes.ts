@@ -1,23 +1,23 @@
-import { DataTypes, Sequelize, Model } from 'sequelize';
+import { DataTypes, Model, Sequelize, Optional } from 'sequelize';
 
-// Define the attributes for the UserRecipe model
+// Define attributes for UserRecipe
 interface UserRecipeAttributes {
   id: number;
   userId: number;
   recipeId: number;
 }
 
-// Define the UserRecipe class extending Sequelize's Model
-export class UserRecipe extends Model<UserRecipeAttributes> implements UserRecipeAttributes {
+// Define optional attributes for creation (omit `id` because it's auto-incremented)
+interface UserRecipeCreationAttributes extends Optional<UserRecipeAttributes, 'id'> {}
+
+// Define the UserRecipe model
+export class UserRecipe extends Model<UserRecipeAttributes, UserRecipeCreationAttributes> implements UserRecipeAttributes {
   public id!: number;
   public userId!: number;
   public recipeId!: number;
-
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
 }
 
-// Define the UserRecipeFactory function to initialize the UserRecipe model
+// Initialize UserRecipe model
 export function UserRecipeFactory(sequelize: Sequelize): typeof UserRecipe {
   UserRecipe.init(
     {

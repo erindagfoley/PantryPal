@@ -1,8 +1,8 @@
 import { DataTypes, Sequelize, Model, Optional } from "sequelize";
+import { User } from "./User";
+import { UserRecipe } from "./UserRecipes";
 
 // Definining attributes for the Recipes
-// ! Not sure what to add in terms of table items
-// TODO Fill out the rest of the table
 interface RecipeAttributes {
   id: number;
   spoonacularId: number;
@@ -11,10 +11,13 @@ interface RecipeAttributes {
 }
 
 // Define the optional attributes for creating a new Recipe
-interface RecipeCreationAttributes extends Optional<RecipeAttributes, 'id'> {}
+interface RecipeCreationAttributes extends Optional<RecipeAttributes, "id"> {}
 
 // Define the Recipe class extending Sequelize's Model
-export class Recipe extends Model<RecipeAttributes, RecipeCreationAttributes> implements RecipeAttributes {
+export class Recipe
+  extends Model<RecipeAttributes, RecipeCreationAttributes>
+  implements RecipeAttributes
+{
   public id!: number;
   public spoonacularId!: number;
   public title!: string;
@@ -47,10 +50,18 @@ export function RecipeFactory(sequelize: Sequelize): typeof Recipe {
       },
     },
     {
-      tableName: 'recipes',
+      tableName: "recipes",
       sequelize,
     }
   );
 
   return Recipe;
+}
+
+export function associateRecipe() {
+  Recipe.belongsToMany(User, {
+    through: UserRecipe,
+    foreignKey: "recipeId",
+    as: "users",
+  });
 }

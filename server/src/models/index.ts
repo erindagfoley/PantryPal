@@ -1,10 +1,15 @@
 import sequelize from "../config/connection.js";
-import { UserFactory } from "./User.js";
-import { RecipeFactory, Recipe } from "./Recipes.js";
-import { UserRecipeFactory, UserRecipe } from "./UserRecipes.js";
+import { UserFactory, associateUser } from "./User.js";
+import { RecipeFactory, associateRecipe } from "./Recipes.js";
+import { UserRecipeFactory } from "./UserRecipes.js";
 
 const User = UserFactory(sequelize);
-const RecipeModel = RecipeFactory(sequelize);
-const UserRecipeModel = UserRecipeFactory(sequelize);
+const Recipe = RecipeFactory(sequelize);
+const UserRecipe = UserRecipeFactory(sequelize);
 
-export { User, RecipeModel, UserRecipeModel };
+// Establish associations
+associateUser();
+associateRecipe();
+
+sequelize.sync({ alter: true }); // Make sure associations are applied
+export { User, Recipe, UserRecipe };
