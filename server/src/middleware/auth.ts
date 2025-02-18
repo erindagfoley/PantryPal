@@ -1,35 +1,25 @@
-import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken';
+import { Request, Response, NextFunction } from "express";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
-// Define the interface for the JWT payload
-interface JwtPayload {
-  username: string;
+// ✅ Extend Express Request to include 'user'
+interface AuthRequest extends Request {
+  user?: JwtPayload;
 }
 
-// Middleware function to authenticate JWT token
-export const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
-  // Get the authorization header from the request
-  const authHeader = req.headers.authorization;
+export const authenticateToken = (req: AuthRequest, res: Response, next: NextFunction): void => {
+  try {
+    const token = req.header("Authorization")?.split(" ")[1];
+    if (!token) {
+      res.status(401).json({ error: "Access denied, no token provided" });
+      return; // ✅ Ensure function stops execution
+    }
 
-  // Check if the authorization header is present
-  if (authHeader) {
-    // Extract the token from the authorization header
-    const token = authHeader.split(' ')[1];
+    const user = jwt.verify(token, process.env.JWT_SECRET as string);
+    req.user = user as JwtPayload; // ✅ TypeScript now knows req.user exists
 
-    // Get the secret key from the environment variables
-    const secretKey = process.env.JWT_SECRET_KEY || '';
-
-    // Verify the JWT token
-    jwt.verify(token, secretKey, (err, user) => {
-      if (err) {
-        return res.sendStatus(403); // Send forbidden status if the token is invalid
-      }
-
-      // Attach the user information to the request object
-      req.user = user as JwtPayload;
-      return next(); // Call the next middleware function
-    });
-  } else {
-    res.sendStatus(401); // Send unauthorized status if no authorization header is present
+    return next(); // ✅ Ensure function always returns
+  } catch (error) {
+    res.status(403).json({ error: "Invalid token" });
+    return; // ✅ Prevent missing return path error
   }
 };
