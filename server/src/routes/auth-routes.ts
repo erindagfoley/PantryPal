@@ -6,6 +6,8 @@ import bcrypt from 'bcrypt';  // Import the bcrypt library for password hashing
 // Login function to authenticate a user
 export const login = async (req: Request, res: Response): Promise<Response> => {
   try {
+    console.log(req.body);
+    
     const { username, password } = req.body;
 
     // Find user in the database
@@ -14,9 +16,12 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
     if (!user) {
       return res.status(401).json({ message: "Authentication failed" });
     }
+console.log(user.password);
 
     // Compare password with the stored hash
     const passwordIsValid = await bcrypt.compare(password, user.password);
+    console.log("At password is Valid:", passwordIsValid);
+    
     if (!passwordIsValid) {
       return res.status(401).json({ message: "Authentication failed" });
     }
@@ -40,17 +45,10 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
 // Signup function to register a new user
 export const signUp = async (req: Request, res: Response): Promise<Response> => {
   try {
-    const { username, email, password } = req.body;
-
-    // Hash password before saving
-    const hashedPassword = await bcrypt.hash(password, 10);
+    console.log(req.body);
 
     // Create new user
-    const newUser = await User.create({
-      username,
-      email,
-      password: hashedPassword,
-    });
+    const newUser = await User.create(req.body);
 
     console.log(newUser);
 
