@@ -21,7 +21,7 @@ app.get('*', (_req: Request, res: Response) => {
     res.sendFile(path.join(root, '../client/src/index.html'));
 });
 
-// Test-Start Server line:
+// Test-Start Server line
 // app.listen(PORT, () => console.log(`Server is listening at http://localhost:${PORT}`));
 
 
