@@ -1,4 +1,4 @@
-import { DataTypes, Sequelize, Model, Optional } from "sequelize";
+import { DataTypes, Sequelize, Model } from "sequelize";
 
 // Definining attributes for the Recipes
 // ! Not sure what to add in terms of table items
