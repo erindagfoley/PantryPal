@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
-import express from 'express';
+import express, { type Request, type Response} from 'express';
 import path from 'node:path';
 const root = process.cwd();
 import sequelize from './config/connection.js';
@@ -17,9 +17,12 @@ app.use(express.json());
 app.use(routes);
 
 // Wild card route to serve the index.html file
-app.get('*', (_req, res) => {
+app.get('*', (_req: Request, res: Response) => {
     res.sendFile(path.join(root, '../client/dist/index.html'));
 });
+
+// Test-code line to check if the server is running
+// app.listen(PORT, () => console.log(`Server is listening at http://localhost:${PORT}`));
 
 // * Change force to true to drop tables and recreate them
 sequelize.sync({force: false}).then(() => {
