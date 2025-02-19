@@ -1,5 +1,5 @@
 import { useState, useEffect, useLayoutEffect } from "react";
-// import { retrieveUsers } from "../api/userAPI";
+import { retrieveUsers } from "../api/userAPI";
 import type { UserData } from "../interfaces/UserData";
 import ErrorPage from "./ErrorPage";
 import UserList from '../components/Users';
@@ -12,10 +12,18 @@ const Home = () => {
     const [loginCheck, setLoginCheck] = useState(false);
 
     useEffect(() => {
+        console.log(loginCheck,"HOME")
         if (loginCheck) {
             fetchUsers();
         }
+        // else{
+        //     location.replace('/login')
+        // }
     }, [loginCheck]);
+
+ 
+
+
 
     useLayoutEffect(() => {
         checkLogin();
@@ -29,7 +37,8 @@ const Home = () => {
 
     const fetchUsers = async () => {
         try {
-            // const data = await retrieveUsers();
+            const data = await retrieveUsers();
+            console.log(data)
             setUsers([])
         } catch (err) {
             console.error('Failed to retrieve tickets:', err);

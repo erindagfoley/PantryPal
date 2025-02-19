@@ -27,6 +27,7 @@ const SignUp = () => {
     try {
       // Call the sign up API endpoint with signUpData
       const data = await signUp(signUpData);
+      console.log("data.token",data.token)
       // If sign up is successful, call Auth.login to store the token in localStorage
       Auth.login(data.token);
     } catch (err) {

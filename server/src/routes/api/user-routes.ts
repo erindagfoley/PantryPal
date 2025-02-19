@@ -6,10 +6,13 @@ const router = express.Router();
 
 // GET /users - Get all users
 router.get('/', async (_req: Request, res: Response) => {
+  console.log("GET ROUTE")
   try {
     const users = await User.findAll({
       attributes: { exclude: ['password'] }
     });
+    console.log(users),"GET";
+    
     res.json(users);
   } catch (error: any) {
     res.status(500).json({ message: error.message });
