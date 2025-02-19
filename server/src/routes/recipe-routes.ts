@@ -1,11 +1,10 @@
-import { Router } from 'express';
-import { User, Recipe, UserRecipe } from '../models';
+import { Router } from "express";
+import { User, Recipe, UserRecipe } from "../models";
 
 const router = Router();
 
-
 // Route to save a recipe for a user
-router.post('/save-recipe', async (req, res) => {
+router.post("/save-recipe", async (req, res) => {
   try {
     const { userId, spoonacularId, title, image } = req.body;
 
@@ -16,32 +15,37 @@ router.post('/save-recipe', async (req, res) => {
 
     await UserRecipe.create({ userId, recipeId: recipe.id });
 
-    res.json({ message: 'Recipe saved!', recipe });
+    res.json({ message: "Recipe saved!", recipe });
   } catch (error: any) {
     res.status(500).json({ error: error.message });
   }
 });
 
 // Route to get a user's saved recipes
-router.get('/user/:userId/saved-recipes', async (req, res) => {
-    try {
-      const user = await User.findByPk(req.params.userId, {
-        include: [
-          {
-            model: Recipe,
-            as: 'recipes', // Make sure to use the alias defined in associations
-            through: { attributes: [] }, // Exclude join table columns
-          },
-        ],
-      });
-  
-      if (!user) return res.status(404).json({ message: 'User not found' });
-  
-      res.json(user.recipes); // Now this should work
-    } catch (error) {
-      res.status(500).json({ error: error.message });
+router.get("/user/:userId/saved-recipes", async (req, res) => {
+  try {
+    const user = await User.findByPk(req.params.userId, {
+      include: [
+        {
+          model: Recipe,
+          as: "recipes",
+          through: { attributes: [] },
+        },
+      ],
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
     }
-  });
-  
-  
-  export default router;
+
+    return res.json(user.recipes);
+  } catch (error) {
+    if (error instanceof Error) {
+      return res.status(500).json({ error: error.message });
+    } else {
+      return res.status(500).json({ error: "An unknown error occurred" });
+    }
+  }
+});
+
+export default router;

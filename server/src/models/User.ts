@@ -27,6 +27,9 @@ export class User
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
+  // Declare the `recipes` property for TypeScript
+  public recipes?: Recipe[];
+
   // Method to hash and set the password for the user
   public async setPassword(password: string) {
     const saltRounds = 10;
