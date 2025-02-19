@@ -1,7 +1,6 @@
 import { DataTypes, Sequelize, Model, Optional } from "sequelize";
-import { User } from "./User";
-import { UserRecipe } from "./UserRecipes";
-import { Ingredients } from "./Ingredients";
+import { User } from "./User.js";
+import { UserRecipe } from "./UserRecipes.js";
 
 // Definining attributes for the Recipes
 interface RecipeAttributes {
