@@ -11,7 +11,7 @@ router.get('/', async (_req: Request, res: Response) => {
     const users = await User.findAll({
       attributes: { exclude: ['password'] }
     });
-    console.log(users),"GET";
+    console.log(users,"GET");
     
     res.json(users);
   } catch (error: any) {

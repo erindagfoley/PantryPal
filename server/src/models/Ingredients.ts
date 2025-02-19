@@ -1,21 +1,17 @@
-import { DataTypes, Sequelize, Model } from "sequelize";
+import { DataTypes, Sequelize, Model, CreationOptional, InferAttributes, InferCreationAttributes } from "sequelize";
 
-// Definining attributes for the Recipes
-// ! Not sure what to add in terms of table items
-// TODO Fill out the rest of the table
-interface IngredientsAttributes {
-  id: number;
+
+// Define the Ingredients class
+export class Ingredients extends Model<InferAttributes<Ingredients>, InferCreationAttributes<Ingredients>> {
+  declare id: CreationOptional<number>;
+  declare name: string;
+  declare amount: number;
+  declare unit: string;
+  declare userId: string;
+ 
 }
 
-// Define the Recipe class extending Sequelize's Model
-export class Ingredients extends Model<IngredientsAttributes> implements IngredientsAttributes {
-  public id!: number;
-
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
-}
-
-export function IngredientsFactory(sequelize: Sequelize): typeof Ingredients {
+export function IngredientsFactory(sequelize: Sequelize) {
   Ingredients.init(
     {
       id: {
@@ -23,15 +19,29 @@ export function IngredientsFactory(sequelize: Sequelize): typeof Ingredients {
         autoIncrement: true,
         primaryKey: true,
       },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      amount: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      unit: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      userId: {
+        type: DataTypes.STRING, // Link to the user who owns the ingredient
+        allowNull: false,
+      },
+   
     },
     {
-      tableName: 'ingredients',  // Name of the table in PostgreSQL
-      sequelize, // The Sequelize instance that connects to PostgreSQL
-      hooks: {
-        // Leaving empty for now in case we need it
-      }
+      tableName: "ingredients",
+      sequelize,
     }
   );
 
-  return Ingredients;  // Return the initialized User model
+  return Ingredients;
 }
