@@ -11,5 +11,6 @@ const UserRecipe = UserRecipeFactory(sequelize);
 associateUser();
 associateRecipe();
 
-sequelize.sync({ alter: true }); // Make sure associations are applied
+// Make sure associations are applied
+sequelize.sync({ alter: true }); 
 export { User, Recipe, UserRecipe };
