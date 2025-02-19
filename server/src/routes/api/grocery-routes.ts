@@ -1,18 +1,18 @@
 import { Router } from "express";
 import axios from "axios";
 import { authenticateToken } from "../../middleware/auth.js";
-import GroceryList from "../../models/GroceryList.js";
+import { Ingredients } from "../../models/Ingredients.js";
 
 const router = Router();
 const SPOONACULAR_API_KEY = process.env.SPOONACULAR_API_KEY;
 
-//Generate a grocery list from selected recipe
+// Generate a grocery list from selected recipes
 router.post("/generate", authenticateToken, async (req, res) => {
   const { recipeIds } = req.body;
   if (!req.user) {
     return res.status(401).json({ error: "Unauthorized" });
   }
-  const userId = req.user.username; // Assuming username is used as the unique identifier
+  const userId = req.user.username; 
 
   if (!recipeIds || recipeIds.length === 0) {
     return res.status(400).json({ error: "No recipes provided." });
@@ -21,7 +21,7 @@ router.post("/generate", authenticateToken, async (req, res) => {
   try {
     let groceryItems: { name: string; amount: number; unit: string }[] = [];
 
-    //Fetch ingredients for each recipe
+    // Fetch ingredients for each recipe
     for (const recipeId of recipeIds) {
       const response = await axios.get(
         `https://api.spoonacular.com/recipes/${recipeId}/information`,
@@ -52,20 +52,24 @@ router.post("/generate", authenticateToken, async (req, res) => {
       }
     });
 
-    // Store in DB
-    const groceryList = await GroceryList.create({
-      userId,
-      items: aggregatedList,
-    });
+    // Store each ingredient in the Ingredients table
+    for (const [name, { amount, unit }] of Object.entries(aggregatedList)) {
+      await Ingredients.create({
+        name,
+        amount,
+        unit,
+        userId,
+      });
+    }
 
-    return res.status(201).json({ message: "Grocery list generated!", groceryList });
+    return res.status(201).json({ message: "Grocery list generated!" });
   } catch (error) {
     console.error("Error generating grocery list:", error);
     return res.status(500).json({ error: "Internal server error." });
   }
 });
 
-//Retrieve a user's grocery lists
+// Retrieve a user's grocery lists
 router.get("/", authenticateToken, async (req, res) => {
   if (!req.user) {
     return res.status(401).json({ error: "Unauthorized" });
@@ -73,34 +77,27 @@ router.get("/", authenticateToken, async (req, res) => {
   const userId = req.user.username;
 
   try {
-    const groceryLists = await GroceryList.findAll({
+    const ingredients = await Ingredients.findAll({
       where: { userId },
       order: [["createdAt", "DESC"]],
     });
 
-    return res.json(groceryLists);
+    return res.json(ingredients);
   } catch (error) {
     console.error("Error fetching grocery lists:", error);
     return res.status(500).json({ error: "Internal server error." });
   }
 });
 
-// Delete a grocery list
-router.delete("/:id", authenticateToken, async (req, res) => {
-  const { id } = req.params;
+// Delete a grocery list (delete all ingredients for the user)
+router.delete("/", authenticateToken, async (req, res) => {
   if (!req.user) {
     return res.status(401).json({ error: "Unauthorized" });
   }
   const userId = req.user.username;
 
   try {
-    const groceryList = await GroceryList.findOne({ where: { id, userId } });
-
-    if (!groceryList) {
-      return res.status(404).json({ error: "Grocery list not found." });
-    }
-
-    await groceryList.destroy();
+    await Ingredients.destroy({ where: { userId } });
     return res.json({ message: "Grocery list has been deleted successfully." });
   } catch (error) {
     console.error("Error deleting grocery list:", error);
