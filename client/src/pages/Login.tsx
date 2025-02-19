@@ -50,7 +50,6 @@ const Login = () => {
         </div>
         {/* Password input field */}
         <div className="form-group">
-          <label>Password</label>
           <input 
             className="form-input"
             type='password'
