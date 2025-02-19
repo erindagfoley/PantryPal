@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { userRouter } from './user-routes.js';
-import groceryRoutes from "./grocery-routes";
+import groceryRoutes from "./grocery-routes.js";
 
 const router = Router();
 

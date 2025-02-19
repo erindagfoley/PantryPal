@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "sequelize";
-import sequelize from "../config/connection";
-import { User } from "./User";
+import sequelize from "../config/connection.js";
+// import { User } from "./User.js";
 
 class GroceryList extends Model {}
 
@@ -12,14 +12,14 @@ GroceryList.init(
       allowNull: false,
       primaryKey: true,
     },
-    userId: {
-      type: DataTypes.UUID,
-      allowNull: false,
-      references: {
-        model: User,
-        key: "id",
-      },
-    },
+    // userId: {
+    //   type: DataTypes.UUID,
+    //   allowNull: false,
+    //   references: {
+    //     model: User,
+    //     key: "id",
+    //   },
+    // },
     items: {
       type: DataTypes.JSONB, // Stores structured ingredient data
       allowNull: false,
