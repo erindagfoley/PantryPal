@@ -9,10 +9,10 @@ const retrieveUsers = async () => {
       }
     });
     const data = await response.json();
-
-    if(!response.ok) {
-      throw new Error('Invalid user API response, check network tab!');
-    }
+   console.log(data)
+    // if(!response.ok) {
+    //   throw new Error('Invalid user API response, check network tab!');
+    // }
 
     return data;
 
