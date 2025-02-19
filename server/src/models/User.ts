@@ -90,7 +90,7 @@ export function associateUser() {
 
   // Add this association
   User.hasMany(Ingredients, {
-    foreignKey: "userId",
+    foreignKey: "userID",
     as: "ingredients",
   });
 }

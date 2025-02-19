@@ -3,7 +3,7 @@ import { DataTypes, Sequelize, Model, Optional } from "sequelize";
 // Define attributes for the Ingredients model
 interface IngredientsAttributes {
   id: number;
-  userId: number; // Foreign key to associate with the User table
+  userID: number; // Foreign key to associate with the User table
   spoonacularId: number; // Foreign key to associate with the Recipe table
   name: string; // Name of the ingredient
   amount: number; // Quantity of the ingredient
@@ -19,7 +19,7 @@ export class Ingredients
   implements IngredientsAttributes
 {
   public id!: number;
-  public userId!: number;
+  public userID!: number;
   public spoonacularId!: number;
   public name!: string;
   public amount!: number;
@@ -38,7 +38,7 @@ export function IngredientsFactory(sequelize: Sequelize): typeof Ingredients {
         autoIncrement: true,
         primaryKey: true,
       },
-      userId: {
+      userID: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
