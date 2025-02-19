@@ -5,9 +5,13 @@ import path from 'node:path';
 const root = process.cwd();
 import sequelize from './config/connection.js';
 import routes from './routes/index.js';
+import savedRecipesRoutes from "./routes/api/savedRecipesAPI.js"; // ✅ Correct the path
+
+
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+app.use("/api/saved-recipes", savedRecipesRoutes);
 
 // Serves static files in the entire client's dist folder
 app.use(express.static('../client/dist'));
