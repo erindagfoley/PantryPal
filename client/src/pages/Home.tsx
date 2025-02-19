@@ -1,5 +1,5 @@
 import { useState, useEffect, useLayoutEffect } from "react";
-import { retrieveUsers } from "../api/userAPI";
+// import { retrieveUsers } from "../api/userAPI";
 import type { UserData } from "../interfaces/UserData";
 import ErrorPage from "./ErrorPage";
 import UserList from '../components/Users';
@@ -29,8 +29,8 @@ const Home = () => {
 
     const fetchUsers = async () => {
         try {
-            const data = await retrieveUsers();
-            setUsers(data)
+            // const data = await retrieveUsers();
+            setUsers([])
         } catch (err) {
             console.error('Failed to retrieve tickets:', err);
             setError(true);

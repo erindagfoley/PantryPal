@@ -37,8 +37,8 @@ router.get("/user/:userId/saved-recipes", async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-
-    return res.json(user.recipes);
+    return res.json(user);
+    // return res.json(user.recipes);
   } catch (error) {
     if (error instanceof Error) {
       return res.status(500).json({ error: error.message });
