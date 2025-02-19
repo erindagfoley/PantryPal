@@ -2,6 +2,7 @@ import { DataTypes, Sequelize, Model, Optional } from "sequelize";
 import bcrypt from "bcrypt";
 import { Recipe } from "./Recipes";
 import { UserRecipe } from "./UserRecipes";
+import { Ingredients } from "./Ingredients";
 
 // Define the attributes for the User model
 interface UserAttributes {
@@ -85,5 +86,11 @@ export function associateUser() {
     through: UserRecipe,
     foreignKey: "userID",
     as: "recipes",
+  });
+
+  // Add this association
+  User.hasMany(Ingredients, {
+    foreignKey: "userId",
+    as: "ingredients",
   });
 }

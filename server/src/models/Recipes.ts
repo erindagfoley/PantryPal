@@ -1,6 +1,7 @@
 import { DataTypes, Sequelize, Model, Optional } from "sequelize";
 import { User } from "./User";
 import { UserRecipe } from "./UserRecipes";
+import { Ingredients } from "./Ingredients";
 
 // Definining attributes for the Recipes
 interface RecipeAttributes {
@@ -63,5 +64,10 @@ export function associateRecipe() {
     through: UserRecipe,
     foreignKey: "recipeId",
     as: "users",
+  });
+
+  Recipe.hasMany(Ingredients, {
+    foreignKey: "spoonacularId",
+    as: "ingredients",
   });
 }
