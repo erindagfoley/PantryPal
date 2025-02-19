@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { searchRecipes } from "../api/recipeAPI";
+import { searchRecipes } from "../api/recipeAPI.js";
 
 interface Recipe {
     id: number;
