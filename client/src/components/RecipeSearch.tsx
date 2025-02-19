@@ -1,49 +1,35 @@
-//created by erin
 import React, { useState } from "react";
-import { fetchRecipes, Recipe } from "../api/api"; // Import Recipe type
+import { fetchRecipes, Recipe } from "../api/api";
 
-const RecipeSearch: React.FC = () => {
-  const [query, setQuery] = useState("");
-  const [recipes, setRecipes] = useState<Recipe[]>([]); // ✅ Use Recipe[] instead of any[]
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+const RecipeList: React.FC = () => {
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleSearch = async () => {
-    setLoading(true);
-    setError(null);
     try {
-      const data = await fetchRecipes(query);
-      setRecipes(data);
-    } catch (err) {
-      setError("Failed to fetch recipes");
+      const results = await fetchRecipes(searchQuery);
+      setRecipes(results);
+    } catch (error) {
+      console.error("Error fetching recipes:", error);
     }
-    setLoading(false);
   };
 
   return (
-    <div className="p-4">
+    <div>
       <input
         type="text"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
         placeholder="Search for recipes..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        className="border p-2 rounded"
       />
-      <button
-        onClick={handleSearch}
-        className="ml-2 bg-blue-500 text-white p-2 rounded"
-      >
-        Search
-      </button>
-
-      {loading && <p>Loading...</p>}
-      {error && <p className="text-red-500">{error}</p>}
-
-      <ul className="mt-4">
+      <button onClick={handleSearch}>Search</button>
+      <ul>
         {recipes.map((recipe) => (
-          <li key={recipe.id} className="p-2 border-b">
-            <img src={recipe.image} alt={recipe.title} className="w-16 h-16" />
-            {recipe.title}
+          <li key={recipe.id}>
+            <a href={recipe.sourceUrl} target="_blank" rel="noopener noreferrer">
+              {recipe.title}
+            </a>
+            <img src={recipe.image} alt={recipe.title} />
           </li>
         ))}
       </ul>
@@ -51,4 +37,4 @@ const RecipeSearch: React.FC = () => {
   );
 };
 
-export default RecipeSearch;
+export default RecipeList;
