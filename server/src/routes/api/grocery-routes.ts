@@ -1,7 +1,7 @@
 import { Router } from "express";
 import axios from "axios";
-import { authenticateToken } from "../../middleware/auth";
-import GroceryList from "../../models/GroceryList";
+import { authenticateToken } from "../../middleware/auth.js";
+import GroceryList from "../../models/GroceryList.js";
 
 const router = Router();
 const SPOONACULAR_API_KEY = process.env.SPOONACULAR_API_KEY;
