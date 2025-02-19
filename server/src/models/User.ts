@@ -2,6 +2,7 @@ import { DataTypes, Sequelize, Model, Optional } from "sequelize";
 import bcrypt from "bcrypt";
 import { Recipe } from "./Recipes.js";
 import { UserRecipe } from "./UserRecipes.js";
+import { Ingredients } from "./Ingredients.js";
 
 // Define the attributes for the User model
 interface UserAttributes {
