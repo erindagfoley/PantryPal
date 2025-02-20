@@ -9,7 +9,7 @@ export interface Recipe {
   sourceUrl: string; // Added to include the recipe link
 }
 
-const API_KEY = import.meta.env.VITE_SPOONACULAR_API;
+const API_KEY = "f9d347f96b944bdab51ea58c292c8aa9";
 const BASE_URL = "https://api.spoonacular.com/recipes/complexSearch";
 
 export const fetchRecipes = async (query: string): Promise<Recipe[]> => {
