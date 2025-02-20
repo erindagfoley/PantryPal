@@ -1,43 +1,36 @@
-# PantryPal
+# 🥑 PantryPal
 
 ## Description
+PantryPal is a full-stack web application that allows users to search for recipes, save their favorite meals, and generate grocery lists based on selected recipes. The goal is to streamline meal planning and grocery shopping by providing a user-friendly experience with recipe discovery and meal organization.
 
-This website allows users to search for recipes using Spoonacular, save their favorite meals, and generate a grocery list based on selected recipes. Instead of using multiple APIs, we make two separate requests to Spoonacular:
-Fetch recipes based on user search queries
-Retrieve the ingredient details for selected recipes to build a structured grocery list
-Additionally, users can upload and manage images for their saved recipes and grocery items using Cloudinary, making meal planning more interactive and visually engaging.
-The goal is to streamline meal planning and grocery shopping by providing an easy-to-use platform that integrates recipe discovery, grocery list management, and image storage into one seamless experience.
-
-## Table of Contents
-
-- [Description](#description)
-- [User Story](#user-story)
-- [Installation](#installation)
-- [Acceptance-Criteria](#acceptence-criteria)
-- [Video Tutorial](#video-tutorial)
-- [Github-repository](#github-repository)
+## 🚀 Live Demo
+🔗 https://pantrypal-otuv.onrender.com/
+<img width="1577" alt="Screenshot 2025-02-20 at 11 56 58 AM" src="https://github.com/user-attachments/assets/61a1e94c-bdaf-41fe-a3d0-73a632e02231" />
 
 
-## User Story
+---
 
-AS A household member,
-I WANT a website where I can search for recipes, generate a grocery list, and save images of my meals,
-SO THAT I can efficiently organize what is needed to cook meals and keep track of my saved recipes.
+## 🛠️ Features
+- 🔍 **Search Recipes** – Look up meal ideas using the Spoonacular API.
+- 📋 **Save Favorite Recipes** – Store and manage a collection of favorite meals.
+- 🛒 **Generate Grocery Lists** – (Planned Feature) Convert saved recipes into an ingredient shopping list.
+- 🔐 **User Authentication** – Secure sign-up and login functionality with JWT.
+- 🌐 **Full-Stack Deployment** – Hosted with **Render** for backend & **Netlify/Vercel** for frontend.
 
+---
 
+## 📂 Tech Stack
+- **Frontend:** React, TypeScript, Vite, CSS
+- **Backend:** Node.js, Express.js
+- **Database:** PostgreSQL, Sequelize ORM
+- **APIs:** Spoonacular API
+- **Authentication:** JWT (JSON Web Tokens)
+- **Deployment:** Render (Backend), Netlify/Vercel (Frontend)
 
+---
 
-## Installation
-
-1) 
-2) 
-3) 
-
-## Acceptence Criteria
-
-
-## Video Tutorial
-[Video Tutorial]()
-
-## GitHub Repository
-[Github-Repo]()
+## 🏗️ Installation & Setup
+1. **Clone the Repository**
+   ```sh
+   git clone https://github.com/YOUR_GITHUB/PantryPal.git
+   cd PantryPal
