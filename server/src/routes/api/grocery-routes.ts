@@ -4,7 +4,7 @@ import { authenticateToken } from "../../middleware/auth.js";
 import { Ingredients } from "../../models/Ingredients.js";
 
 const router = Router();
-const SPOONACULAR_API_KEY = process.env.SPOONACULAR_API_KEY;
+const SPOONACULAR_API_KEY = "f9d347f96b944bdab51ea58c292c8aa9";
 
 // Generate a grocery list from selected recipes
 router.post("/generate", authenticateToken, async (req, res) => {
