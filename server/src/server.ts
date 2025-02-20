@@ -7,10 +7,6 @@ import sequelize from './config/connection.js';
 import routes from './routes/index.js';
 import savedRecipesRoutes from "./routes/api/savedRecipesAPI.js"; // ✅ Correct the path
 
-
-
-
-
 const app = express();
 const PORT = process.env.PORT || 3001;
 app.use("/api/saved-recipes", savedRecipesRoutes);

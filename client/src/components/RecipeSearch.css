@@ -1,39 +1,127 @@
 /* RecipeList.css */
-.recipe-card {
-    border-radius: 15px; /* Rounded edges for the card */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1); /* Fancy shadow */
-    overflow: hidden; /* Ensure the image respects the rounded corners */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
-  }
-  
-  .recipe-card:hover {
-    transform: translateY(-5px); /* Slight lift on hover */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 12px 40px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
-  }
-  
-  .recipe-image {
-    border-radius: 15px 15px 0 0; /* Rounded edges only at the top of the image */
-  }
-  
-  .card-img-container {
-    height: 200px; /* Fixed height for the image container */
-    overflow: hidden; /* Prevent overflow */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .card-img-container img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-  }
-  
-  .card-body {
+
+@import url("https://fonts.googleapis.com/css2?family=Chicle&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+.recipe-list-container {
+    background-image: url('https://static.vecteezy.com/system/resources/previews/003/662/775/non_2x/set-of-icons-on-the-theme-of-food-food-doodle-with-food-icons-on-white-background-free-vector.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh; 
     display: flex;
     flex-direction: column;
-  }
-  
-  .card-body .btn {
-    margin-top: auto; /* Push button to the bottom */
-  }
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border: 10px solid #FF8C00
+}
+
+.recipe-card {
+  border-radius: 15px;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.6), 0 6px 20px rgba(0, 0, 0, 0.8); 
+  overflow: hidden; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+  background: linear-gradient(to bottom right, #FFDAB9, #ffc198, #eba87f, #ff8b83); 
+  text-align: center;
+}
+
+.recipe-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2), 0 12px 40px rgba(0, 0, 0, 0.2); 
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.recipe-card h5,
+.recipe-card p,
+.recipe-card a {
+    color: #8f5f43; 
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    
+}
+.recipe-card a.btn {
+    background-color: rgba(230, 108, 108, 0.582); 
+    color: rgb(247, 216, 188);
+    border: none;
+    font-family: "Chicle", cursive;
+    font-weight: 500;
+}
+
+.recipe-card a.btn:hover {
+    background-color: rgba(114, 9, 9, 0.589);
+}
+
+.recipe-image {
+  border-radius: 15px 15px 0 0; 
+}
+
+.card-img-container {
+  height: 200px; 
+  overflow: hidden; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-img-container img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-body .btn {
+  margin-top: auto; 
+}
+.search-bar-container {
+  position: sticky;
+  top: 100;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.473);
+  padding: 15px 20px;
+  width: 100%;
+  max-width: 600px; 
+  text-align: center;
+  z-index: 100;
+  box-shadow: 4px 6px 8px 4px rgba(0, 0, 0, 0.6); 
+  border-radius: 8px;
+}
+
+.search-bar-container input {
+  background-color: white; 
+  color: black; 
+  font-weight: bold; 
+  border: 2px solid #FF8C00; 
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 300px;
+}
+
+
+.search-bar-container input::placeholder {
+  color: rgba(0, 0, 0, 0.6); 
+  font-weight: bold;
+}
+
+
+.search-bar-container button {
+  background-color: #FF4500; 
+  color: white; 
+  font-weight: bold;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-bar-container button:hover {
+  background-color: #D84315; 
+}
