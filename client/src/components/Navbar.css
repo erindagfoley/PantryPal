@@ -1,0 +1,85 @@
+/* Navbar Container */
+.navbar {
+  background: linear-gradient(90deg, #ff7e5f, #feb47b); /* Gradient background */
+  padding: 15px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar Inner Container */
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Logo */
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+/* Navigation Links */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-links li a:hover {
+  color: #ffd700; /* Gold hover effect */
+}
+
+/* Auth Buttons */
+.auth-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.btn {
+  padding: 8px 15px;
+  font-size: 1rem;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-signup {
+  background-color: white;
+  color: #ff7e5f;
+  border: 2px solid #ff7e5f;
+}
+
+.btn-login {
+  background-color: #ff7e5f;
+  color: white;
+  border: 2px solid white;
+}
+
+.btn-logout {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
