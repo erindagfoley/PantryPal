@@ -2,67 +2,57 @@ import { useState, useEffect, useLayoutEffect } from "react";
 import { retrieveUsers } from "../api/userAPI";
 import type { UserData } from "../interfaces/UserData";
 import ErrorPage from "./ErrorPage";
-import UserList from '../components/Users';
-import auth from '../utils/auth';
-
+import UserList from "../components/Users";
+import auth from "../utils/auth";
+import "./Home.css";
 const Home = () => {
-
     const [users, setUsers] = useState<UserData[]>([]);
     const [error, setError] = useState(false);
     const [loginCheck, setLoginCheck] = useState(false);
 
-    useEffect(() => {
-        console.log(loginCheck,"HOME")
-        if (loginCheck) {
-            fetchUsers();
-        }
-        // else{
-        //     location.replace('/login')
-        // }
-    }, [loginCheck]);
-
- 
-
-
-
+    // Check login state before loading users
     useLayoutEffect(() => {
-        checkLogin();
-    }, []);
-
-    const checkLogin = () => {
         if (auth.loggedIn()) {
             setLoginCheck(true);
         }
-    };
+    }, []);
+
+    // Fetch users when logged in
+    useEffect(() => {
+        if (loginCheck) {
+            fetchUsers();
+        }
+    }, [loginCheck]);
 
     const fetchUsers = async () => {
         try {
             const data = await retrieveUsers();
-            console.log(data)
-            setUsers([])
+            console.log("Fetched Users:", data);
+            setUsers(data); // ✅ Properly set the users list
         } catch (err) {
-            console.error('Failed to retrieve tickets:', err);
+            console.error("Failed to retrieve users:", err);
             setError(true);
         }
-    }
+    };
 
     if (error) {
         return <ErrorPage />;
     }
 
     return (
-        <>
-            {
-                !loginCheck ? (
-                    <div className='login-notice'>
-                        <h1>
-                            Login to view all your friends!
-                        </h1>
-                    </div>
-                ) : (
+        <div className="home-container">
+            {!loginCheck ? (
+                <div className="login-notice">
+                    <h1>Welcome to PantryPal!</h1>
+                    <p>Login to connect with friends and manage recipes.</p>
+                </div>
+            ) : (
+                <>
+                    <h2 className="section-title">Your Friends</h2>
                     <UserList users={users} />
-                )}
-        </>
+                </>
+            )}
+        </div>
     );
 };
 

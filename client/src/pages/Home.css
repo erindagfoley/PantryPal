@@ -1,0 +1,21 @@
+.home-container {
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    min-height: 100vh;
+    color: white;
+}
+
+.login-notice {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 2rem;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    max-width: 500px;
+    margin: auto;
+}
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
