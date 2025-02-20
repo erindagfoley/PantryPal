@@ -8,7 +8,7 @@ import routes from './routes/index.js';
 import savedRecipesRoutes from "./routes/api/savedRecipesAPI.js"; // ✅ Correct the path
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 4000;
 app.use("/api/saved-recipes", savedRecipesRoutes);
 
 // Serves static files in the entire client's dist folder
